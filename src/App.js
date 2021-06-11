@@ -52,8 +52,8 @@ function App() {
         <Route path="/allQuotes" exact>
           <AllQuotes quotes={quotes} />
         </Route>
-        <Route path="/allQuotes/:quoteDetails">
-          <QuoteDetails />
+        <Route path="/allQuotes/:quoteId">
+          <QuoteDetails quotes={quotes} />
         </Route>
       </main>
     </div>
