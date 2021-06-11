@@ -1,24 +1,25 @@
-import { Redirect, Router } from "react-router";
+import { Redirect, Route } from "react-router-dom";
 import AddQuote from "./pages/AddQuote";
 import AllQuotes from "./pages/AllQuotes";
 import QuoteDetails from "./pages/QuoteDetails";
 
 function App() {
+  // console.log('APP RUNNING')
   return (
     <div>
       <main>
-        <Router path="/">
+        <Route path="/" exact>
           <Redirect to="/addQuote" />
-        </Router>
-        <Router path="/addQuote">
+        </Route>
+        <Route path="/addQuote">
           <AddQuote />
-        </Router>
-        <Router path="/allQuotes">
+        </Route>
+        <Route path="/allQuotes" exact>
           <AllQuotes />
-        </Router>
-        <Router path="/qallQuotes/:quoteDetails">
+        </Route>
+        <Route path="/allQuotes/:quoteDetails">
           <QuoteDetails />
-        </Router>
+        </Route>
       </main>
     </div>
   );
