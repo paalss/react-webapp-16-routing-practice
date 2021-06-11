@@ -5,7 +5,7 @@ import classes from './QuoteList.module.css';
 
 const QuoteList = (props) => {
   // console.log('QUOTELIST RUNNING')
-  console.log(props.quotes);
+  // console.log(props.quotes);
   return (
     <Fragment>
       <ul className={classes.list}>

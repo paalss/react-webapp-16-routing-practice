@@ -11,9 +11,30 @@ function App() {
     { id: 1, author: "katjakaj", text: "rerer" },
     { id: 2, author: "bentabent", text: "eeeee" },
   ]);
+
+  const findUnusedQuoteId = () => {
+    function next(prop) {
+      return function (arr) {
+        var used = arr.reduce(function (o, v) {
+          o[v[prop]] = true;
+          return o;
+        }, {});
+        for (var i = 1; used[i]; i++);
+        return i;
+      };
+    }
+    var nextId = next("id");
+
+    return nextId(quotes);
+  };
+
   const addQuoteHandler = (quote) => {
+    const id = findUnusedQuoteId();
+
+    const quoteWithId = { id: id, ...quote };
+
     setQuotes((prevState) => {
-      return [...prevState, quote];
+      return [...prevState, quoteWithId];
     });
   };
   return (

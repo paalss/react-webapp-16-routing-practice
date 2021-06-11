@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import classes from './QuoteItem.module.css';
 
 const QuoteItem = (props) => {
+  // console.log(props);
   return (
     <li className={classes.item}>
       <figure>
@@ -10,7 +11,7 @@ const QuoteItem = (props) => {
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <Link to="/allQuotes/:quoteDetails" className="btn">
+      <Link to={`/allQuotes/${props.id}`} className="btn">
         View Fullscreen
       </Link>
     </li>

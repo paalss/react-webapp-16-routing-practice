@@ -4,11 +4,7 @@ const AddQuote = ({ updateQuotes }) => {
   const addQuoteHandler = (quote) => {
     updateQuotes(quote);
   };
-  return (
-    <div>
-      <QuoteForm onAddQuote={addQuoteHandler} />
-    </div>
-  );
+  return <QuoteForm onAddQuote={addQuoteHandler} />;
 };
 
 export default AddQuote;
