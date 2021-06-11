@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import MainNavigation from "./components/layout/MainNavigation";
 import AddQuote from "./pages/AddQuote";
 import AllQuotes from "./pages/AllQuotes";
 import QuoteDetails from "./pages/QuoteDetails";
@@ -7,6 +8,9 @@ function App() {
   // console.log('APP RUNNING')
   return (
     <div>
+      <header>
+        <MainNavigation/>
+      </header>
       <main>
         <Route path="/" exact>
           <Redirect to="/addQuote" />
