@@ -10,8 +10,8 @@ import NotFound from "./pages/NotFound";
 function App() {
   // console.log('APP RUNNING')
   const [quotes, setQuotes] = useState([
-    { id: 1, author: "katjakaj", text: "rerer" },
-    { id: 2, author: "bentabent", text: "eeeee" },
+    { id: 1, author: "qwerty", text: "fun" },
+    { id: 2, author: "qwerty", text: "great" },
   ]);
 
   const addQuoteHandler = (quote) => {
