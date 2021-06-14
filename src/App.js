@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Redirect, Route } from "react-router-dom";
+import findUnusedId from "./findUnusedId";
 import MainNavigation from "./components/layout/MainNavigation";
 import AddQuote from "./pages/AddQuote";
 import AllQuotes from "./pages/AllQuotes";
@@ -12,24 +13,10 @@ function App() {
     { id: 2, author: "bentabent", text: "eeeee" },
   ]);
 
-  const findUnusedQuoteId = () => {
-    function next(prop) {
-      return function (arr) {
-        var used = arr.reduce(function (o, v) {
-          o[v[prop]] = true;
-          return o;
-        }, {});
-        for (var i = 1; used[i]; i++);
-        return i;
-      };
-    }
-    var nextId = next("id");
-
-    return nextId(quotes);
-  };
+  
 
   const addQuoteHandler = (quote) => {
-    const id = findUnusedQuoteId();
+    const id = findUnusedId(quotes);
 
     const quoteWithId = { id: id, ...quote };
 
