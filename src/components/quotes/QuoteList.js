@@ -1,15 +1,15 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-import QuoteItem from './QuoteItem';
-import classes from './QuoteList.module.css';
+import QuoteItem from "./QuoteItem";
+import classes from "./QuoteList.module.css";
 
-const QuoteList = (props) => {
+const QuoteList = ({ quotes }) => {
   // console.log('QUOTELIST RUNNING')
   // console.log(props.quotes);
   return (
     <Fragment>
       <ul className={classes.list}>
-        {props.quotes.map((quote) => (
+        {quotes.map((quote) => (
           <QuoteItem
             key={quote.id}
             id={quote.id}

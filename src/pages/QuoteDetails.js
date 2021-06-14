@@ -14,7 +14,7 @@ const QuoteDetails = ({ quotes }) => {
   const params = useParams();
   const quoteId = params.quoteId;
 
-  const quote = quotes.find((x) => x.id === parseInt(quoteId));
+  const quote = quotes.find((quote) => quote.id === parseInt(quoteId));
 
   const showCommentsHandler = () => {
     setShowComments(true);

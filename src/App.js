@@ -22,6 +22,7 @@ function App() {
       return [...prevState, quoteWithId];
     });
   };
+  
   return (
     <div>
       <Layout>
