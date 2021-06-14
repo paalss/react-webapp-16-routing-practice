@@ -1,19 +1,20 @@
-import { Fragment, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import QuoteForm from "./../components/quotes/QuoteForm";
 
 const AddQuote = ({ updateQuotes }) => {
-  const [goToAllquotes, setGoToAllQuotes] = useState(false);
+
+  const history = useHistory()
 
   const addQuoteHandler = (quote) => {
     updateQuotes(quote);
-    setGoToAllQuotes(true)
+
+    history.push('/allQuotes')
   };
   
   return (
     <Fragment>
       <QuoteForm onAddQuote={addQuoteHandler} />
-      {goToAllquotes && <Redirect to="/allQuotes"/>}
     </Fragment>
   );
 };
