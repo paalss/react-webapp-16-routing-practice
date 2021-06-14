@@ -4,20 +4,17 @@ import { useHistory, useLocation } from "react-router-dom";
 import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
 
+const sortQuotes = (quotes, isAscending) => {
+  return quotes.sort((quoteA, quoteB) => {
+    if (isAscending) {
+      return quoteA.id > quoteB.id ? 1 : -1;
+    } else {
+      return quoteA.id < quoteB.id ? 1 : -1;
+    }
+  });
+};
+
 const QuoteList = ({ quotes }) => {
-  // console.log('QUOTELIST RUNNING')
-  // console.log(props.quotes);
-
-  const sortQuotes = (quotes, isAscending) => {
-    return quotes.sort((quoteA, quoteB) => {
-      if (isAscending) {
-        return quoteA.id > quoteB.id ? 1 : -1;
-      } else {
-        return quoteA.id < quoteB.id ? 1 : -1;
-      }
-    });
-  };
-
   const history = useHistory();
   const location = useLocation();
 
@@ -28,7 +25,7 @@ const QuoteList = ({ quotes }) => {
   const sortedQuotes = sortQuotes(quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push("/allQuotes?sort=" + isSortingAscending ? "desc" : "asc");
+    history.push("/allQuotes?sort=" + (isSortingAscending ? "desc" : "asc"));
   };
 
   return (
