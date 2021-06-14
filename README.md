@@ -1,4 +1,6 @@
-# react-webapp-routing-practice
+# react-webapp-16-routing-practice
+
+## min kodeløsning
 
 ![app](src/assets/app-2021-06-11-at-141044.png)
 ![app](src/assets/app-2021-06-11-at-17.54.52.png)

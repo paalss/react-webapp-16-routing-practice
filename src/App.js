@@ -13,8 +13,6 @@ function App() {
     { id: 2, author: "bentabent", text: "eeeee" },
   ]);
 
-  
-
   const addQuoteHandler = (quote) => {
     const id = findUnusedId(quotes);
 

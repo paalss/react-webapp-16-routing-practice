@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentsList from "../components/comments/CommentsList";
