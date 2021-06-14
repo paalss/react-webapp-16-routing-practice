@@ -12,7 +12,7 @@ const AddQuote = ({ updateQuotes }) => {
   
   return (
     <Fragment>
-      <QuoteForm onAddQuote={addQuoteHandler} />;
+      <QuoteForm onAddQuote={addQuoteHandler} />
       {goToAllquotes && <Redirect to="/allQuotes"/>}
     </Fragment>
   );

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import findUnusedId from "./findUnusedId";
-import MainNavigation from "./components/layout/MainNavigation";
 import AddQuote from "./pages/AddQuote";
 import AllQuotes from "./pages/AllQuotes";
 import QuoteDetails from "./pages/QuoteDetails";
+import Layout from "./components/layout/Layout";
 
 function App() {
   // console.log('APP RUNNING')
@@ -24,10 +24,7 @@ function App() {
   };
   return (
     <div>
-      <header>
-        <MainNavigation />
-      </header>
-      <main>
+      <Layout>
         <Switch>
           <Route path="/" exact>
             <Redirect to="/addQuote" />
@@ -42,7 +39,7 @@ function App() {
             <QuoteDetails quotes={quotes} />
           </Route>
         </Switch>
-      </main>
+      </Layout>
     </div>
   );
 }

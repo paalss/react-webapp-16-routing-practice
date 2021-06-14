@@ -35,7 +35,7 @@ const QuoteDetails = ({ quotes }) => {
       {showComments ? (
         <Fragment>
           <Redirect to={`/allQuotes/${quoteId}/comments`} />
-          <Route path={`/allQuotes/${quoteId}/comments`}>
+          <Route path={'/allQuotes/:quoteId/comments'}>
             <Comments onAddCommentHandler={onAddCommentHandler} />
             <CommentsList comments={comments} />
           </Route>
