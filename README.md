@@ -1,6 +1,15 @@
 # react-webapp-16-routing-practice
 
-## min kodeløsning
+**Start løsning**
+```
+npm install
+npm start
+```
+
+**Se min løsning**
+```
+git checkout 6123a96
+```
 
 ![app](src/assets/app-2021-06-11-at-141044.png)
 ![app](src/assets/app-2021-06-11-at-17.54.52.png)

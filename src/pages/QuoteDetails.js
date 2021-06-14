@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, Route, useParams } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentsList from "../components/comments/CommentsList";
@@ -21,9 +21,9 @@ const QuoteDetails = ({ quotes }) => {
   };
 
   const onAddCommentHandler = (text) => {
-    const id = findUnusedId(comments)
+    const id = findUnusedId(comments);
     setComments((prevState) => {
-      return [...prevState, {id: id, text: text}];
+      return [...prevState, { id: id, text: text }];
     });
   };
 
@@ -34,8 +34,11 @@ const QuoteDetails = ({ quotes }) => {
       </section>
       {showComments ? (
         <Fragment>
-          <Comments onAddCommentHandler={onAddCommentHandler} />
-          <CommentsList comments={comments} />
+          <Redirect to={`/allQuotes/${quoteId}/comments`} />
+          <Route path={`/allQuotes/${quoteId}/comments`}>
+            <Comments onAddCommentHandler={onAddCommentHandler} />
+            <CommentsList comments={comments} />
+          </Route>
         </Fragment>
       ) : (
         <button className="btn" onClick={showCommentsHandler}>

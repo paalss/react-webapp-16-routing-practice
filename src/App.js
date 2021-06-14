@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import findUnusedId from "./findUnusedId";
 import MainNavigation from "./components/layout/MainNavigation";
 import AddQuote from "./pages/AddQuote";
@@ -28,18 +28,20 @@ function App() {
         <MainNavigation />
       </header>
       <main>
-        <Route path="/" exact>
-          <Redirect to="/addQuote" />
-        </Route>
-        <Route path="/addQuote">
-          <AddQuote updateQuotes={addQuoteHandler} />
-        </Route>
-        <Route path="/allQuotes" exact>
-          <AllQuotes quotes={quotes} />
-        </Route>
-        <Route path="/allQuotes/:quoteId">
-          <QuoteDetails quotes={quotes} />
-        </Route>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/addQuote" />
+          </Route>
+          <Route path="/addQuote">
+            <AddQuote updateQuotes={addQuoteHandler} />
+          </Route>
+          <Route path="/allQuotes" exact>
+            <AllQuotes quotes={quotes} />
+          </Route>
+          <Route path="/allQuotes/:quoteId">
+            <QuoteDetails quotes={quotes} />
+          </Route>
+        </Switch>
       </main>
     </div>
   );
