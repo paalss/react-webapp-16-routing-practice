@@ -1,21 +1,25 @@
-import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import QuoteForm from "./../components/quotes/QuoteForm";
+import useHttp from "../hooks/use-http";
+import { addQuote } from "../lib/api";
+import { useEffect } from "react";
 
-const AddQuote = ({ updateQuotes }) => {
+const AddQuote = () => {
+  const { sendRequest, status } = useHttp(addQuote);
+  const history = useHistory();
 
-  const history = useHistory()
-
-  const addQuoteHandler = (quote) => {
-    updateQuotes(quote);
-
-    history.push('/allQuotes')
-  };
+  useEffect(() => {
+    if (status === "completed") {
+      history.push("/allQuotes");
+    }
+  }, [status, history]);
   
+  const addQuoteHandler = (quote) => {
+    sendRequest(quote);
+  };
+
   return (
-    <Fragment>
-      <QuoteForm onAddQuote={addQuoteHandler} />
-    </Fragment>
+    <QuoteForm isLoading={status === "pending"} onAddQuote={addQuoteHandler} />
   );
 };
 

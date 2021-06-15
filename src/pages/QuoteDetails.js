@@ -1,33 +1,49 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link, Route, useParams, useRouteMatch } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentsList from "../components/comments/CommentsList";
-import findUnusedId from "../findUnusedId";
+import useHttp from "../hooks/use-http";
+import { getSingleQuote } from "../lib/api";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
-const QuoteDetails = ({ quotes }) => {
-  const match = useRouteMatch()
-
-  const [comments, setComments] = useState([
-    { id: 1, text: "first!" },
-    { id: 2, text: "second!" },
-  ]);
+const QuoteDetails = () => {
+  const match = useRouteMatch();
   const params = useParams();
-  const quoteId = params.quoteId;
 
-  const quote = quotes.find((quote) => quote.id === parseInt(quoteId));
+  const { quoteId } = params;
 
-  const onAddCommentHandler = (text) => {
-    const id = findUnusedId(comments);
-    setComments((prevState) => {
-      return [...prevState, { id: id, text: text }];
-    });
-  };
+  const {
+    sendRequest,
+    status,
+    data: loadedQuote,
+    error,
+  } = useHttp(getSingleQuote, true);
+
+  useEffect(() => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered">{error}</p>
+  }
+
+  if (!loadedQuote.text) {
+    return <p>No quote found!</p>;
+  }
 
   return (
     <div>
       <section>
-        <HighlightedQuote text={quote.text} author={quote.author} />
+        <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
       </section>
 
       <div className="centered">
@@ -39,8 +55,8 @@ const QuoteDetails = ({ quotes }) => {
       </div>
 
       <Route path={`${match.path}/comments`}>
-        <Comments onAddCommentHandler={onAddCommentHandler} />
-        <CommentsList comments={comments} />
+        {/* <Comments onAddCommentHandler={onAddCommentHandler} />
+        <CommentsList comments={comments} /> */}
       </Route>
     </div>
   );
