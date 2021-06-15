@@ -1,12 +1,11 @@
-import { Fragment, useState } from "react";
-import { Redirect, Route, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, Route, useParams } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentsList from "../components/comments/CommentsList";
 import findUnusedId from "../findUnusedId";
 
 const QuoteDetails = ({ quotes }) => {
-  const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([
     { id: 1, text: "first!" },
     { id: 2, text: "second!" },
@@ -15,10 +14,6 @@ const QuoteDetails = ({ quotes }) => {
   const quoteId = params.quoteId;
 
   const quote = quotes.find((quote) => quote.id === parseInt(quoteId));
-
-  const showCommentsHandler = () => {
-    setShowComments(true);
-  };
 
   const onAddCommentHandler = (text) => {
     const id = findUnusedId(comments);
@@ -32,19 +27,15 @@ const QuoteDetails = ({ quotes }) => {
       <section>
         <HighlightedQuote text={quote.text} author={quote.author} />
       </section>
-      {showComments ? (
-        <Fragment>
-          <Redirect to={`/allQuotes/${quoteId}/comments`} />
-          <Route path={'/allQuotes/:quoteId/comments'}>
-            <Comments onAddCommentHandler={onAddCommentHandler} />
-            <CommentsList comments={comments} />
-          </Route>
-        </Fragment>
-      ) : (
-        <button className="btn" onClick={showCommentsHandler}>
+      <Route path={"/allQuotes/:quoteId/comments"}>
+        <Comments onAddCommentHandler={onAddCommentHandler} />
+        <CommentsList comments={comments} />
+      </Route>
+      <Route path="/allQuotes/:quoteId" exact>
+        <Link to={`/allQuotes/${quoteId}/comments`} className="btn">
           Load comments
-        </button>
-      )}
+        </Link>
+      </Route>
     </div>
   );
 };
