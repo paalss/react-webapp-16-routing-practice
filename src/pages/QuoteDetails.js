@@ -27,14 +27,18 @@ const QuoteDetails = ({ quotes }) => {
       <section>
         <HighlightedQuote text={quote.text} author={quote.author} />
       </section>
+      
+      <div className="centered">
+        <Route path="/allQuotes/:quoteId" exact>
+          <Link to={`/allQuotes/${quoteId}/comments`} className="btn--flat">
+            Load comments
+          </Link>
+        </Route>
+      </div>
+
       <Route path={"/allQuotes/:quoteId/comments"}>
         <Comments onAddCommentHandler={onAddCommentHandler} />
         <CommentsList comments={comments} />
-      </Route>
-      <Route path="/allQuotes/:quoteId" exact>
-        <Link to={`/allQuotes/${quoteId}/comments`} className="btn">
-          Load comments
-        </Link>
       </Route>
     </div>
   );
