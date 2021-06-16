@@ -1,21 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useHttp from "../../hooks/use-http";
 
 import classes from "./Comments.module.css";
 import NewCommentForm from "./NewCommentForm";
 import CommentsList from "./CommentsList";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-import useHttp from "../../hooks/use-http";
 import { getAllComments } from "../../lib/api";
 
-const Comments = ({ onAddCommentHandler }) => {
+const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const params = useParams();
 
   const { quoteId } = params;
 
-  // legg getAllComments til sendRequest's outer environment
+  // sendRequest skal ha getAllComments tilgjengelig i sitt outer environment
   const { sendRequest, status, data: loadedComments } = useHttp(getAllComments);
 
   useEffect(() => {
@@ -26,15 +26,14 @@ const Comments = ({ onAddCommentHandler }) => {
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
-  
+
   const addedCommentHandler = useCallback(() => {
-    // vil kjøre getAllComments(quoteId)
-    sendRequest(quoteId)
+    // ferdig med å adde comment, nå må vi re-fetch comments
+    // sendRequest vil kjøre getAllComments(quoteId)
+    sendRequest(quoteId);
   }, [sendRequest, quoteId]);
 
   let comments;
-
-  console.debug(status);
 
   if (status === "pending") {
     comments = (

@@ -1,17 +1,18 @@
 import { useEffect, useRef } from "react";
-
 import useHttp from "../../hooks/use-http";
+
+import classes from "./NewCommentForm.module.css";
 import { addComment } from "../../lib/api";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import classes from "./NewCommentForm.module.css";
 
 const NewCommentForm = ({ onAddedComment, quoteId }) => {
   const commentTextRef = useRef();
+
+  // sendRequest skal ha addComment tilgjengelig i sitt outer environment
   const { sendRequest, status, error } = useHttp(addComment);
 
   useEffect(() => {
     if (status === "completed" && !error) {
-      // ferdig med å adde comment, parent component må re-fetch comments
       onAddedComment();
     }
   }, [status, error, onAddedComment]);
@@ -19,13 +20,10 @@ const NewCommentForm = ({ onAddedComment, quoteId }) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    // optional: Could validate here
-
     const enteredText = commentTextRef.current.value;
 
     // sendRequest vil kjøre addComment({text:enteredText}, quoteId)
-    sendRequest({commentData: { text: enteredText}, quoteId});
-    // send comment to server
+    sendRequest({ commentData: { text: enteredText }, quoteId });
   };
 
   return (

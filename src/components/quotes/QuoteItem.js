@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import classes from "./QuoteItem.module.css";
 
 const QuoteItem = ({ text, author, id }) => {
-  // console.log(props);
   return (
     <li className={classes.item}>
       <figure>

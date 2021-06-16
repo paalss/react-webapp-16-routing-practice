@@ -1,9 +1,9 @@
 import { Fragment, useRef, useState } from "react";
 
+import classes from "./QuoteForm.module.css";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { Prompt } from "react-router";
-import classes from "./QuoteForm.module.css";
 
 const QuoteForm = ({ onAddQuote, isLoading }) => {
   const authorInputRef = useRef();
@@ -16,8 +16,6 @@ const QuoteForm = ({ onAddQuote, isLoading }) => {
     const enteredAuthor = authorInputRef.current.value;
     const enteredText = textInputRef.current.value;
 
-    // optional: Could validate here
-
     onAddQuote({ author: enteredAuthor, text: enteredText });
   }
 
@@ -26,7 +24,7 @@ const QuoteForm = ({ onAddQuote, isLoading }) => {
   };
 
   // Fjern grunnen til å prompte brukeren når det navigeres
-  // til annen side. Dette må skje før submitFormHandler funksjon
+  // til annen side. Det skal skje før submitFormHandler funksjon
   // da den rekker å navigere før state endres
   const finishEnteringHandler = () => {
     setIsEntering(false);
