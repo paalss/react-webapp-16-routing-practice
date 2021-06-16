@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link, Route, useParams, useRouteMatch } from "react-router-dom";
+import useHttp from "../hooks/use-http";
+
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
-import useHttp from "../hooks/use-http";
-import { getSingleQuote } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
+import { getSingleQuote } from "../lib/api";
 
 const QuoteDetails = () => {
   const match = useRouteMatch();
@@ -12,6 +13,7 @@ const QuoteDetails = () => {
 
   const { quoteId } = params;
 
+  // sendRequest skal ha getSingleQuote tilgjengelig i sitt outer environment
   const {
     sendRequest,
     status,
@@ -20,6 +22,7 @@ const QuoteDetails = () => {
   } = useHttp(getSingleQuote, true);
 
   useEffect(() => {
+    // vil kjøre getSingleQuote(quoteId)
     sendRequest(quoteId);
   }, [sendRequest, quoteId]);
 

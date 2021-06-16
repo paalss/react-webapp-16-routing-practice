@@ -5,7 +5,8 @@ import NoQuotesFound from "../components/quotes/NoQuotesFound";
 import useHttp from "../hooks/use-http";
 import { getAllQuotes } from "../lib/api";
 
-const AllQuotes = ({ quotes }) => {
+const AllQuotes = () => {
+  // sendRequest skal ha getAllQuotes tilgjengelig i sitt outer environment
   const {
     sendRequest,
     status,
@@ -14,6 +15,7 @@ const AllQuotes = ({ quotes }) => {
   } = useHttp(getAllQuotes, true);
 
   useEffect(() => {
+    // vil kjøre getAllQuotes()
     sendRequest();
   }, [sendRequest]);
 
