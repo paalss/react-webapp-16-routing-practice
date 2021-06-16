@@ -8,6 +8,7 @@ const AddQuote = () => {
   const { sendRequest, status } = useHttp(addQuote);
   const history = useHistory();
 
+  // Sjekk om status er completed, da vil vi navigere bort
   useEffect(() => {
     if (status === "completed") {
       history.push("/allQuotes");

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, Route, useParams, useRouteMatch } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
-import CommentsList from "../components/comments/CommentsList";
 import useHttp from "../hooks/use-http";
 import { getSingleQuote } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -40,6 +39,7 @@ const QuoteDetails = () => {
     return <p>No quote found!</p>;
   }
 
+  // Får hentet quotes, rendre det
   return (
     <div>
       <section>
@@ -55,8 +55,7 @@ const QuoteDetails = () => {
       </div>
 
       <Route path={`${match.path}/comments`}>
-        {/* <Comments onAddCommentHandler={onAddCommentHandler} />
-        <CommentsList comments={comments} /> */}
+        <Comments />
       </Route>
     </div>
   );

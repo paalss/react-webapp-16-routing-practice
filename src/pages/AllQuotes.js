@@ -33,6 +33,7 @@ const AllQuotes = ({ quotes }) => {
     return <NoQuotesFound />;
   }
 
+  // Ingen errors, quotes finnes. Rendre dem
   return <QuoteList quotes={loadedQuotes} />;
 };
 
