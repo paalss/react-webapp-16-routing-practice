@@ -43,6 +43,8 @@ const QuoteDetails = () => {
   }
 
   // Får hentet quotes, rendre det
+  console.log(match);
+  
   return (
     <div>
       <section>

@@ -12,6 +12,8 @@ import { getAllComments } from "../../lib/api";
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const params = useParams();
+  console.log('empty?');
+  console.log(params);
 
   const { quoteId } = params;
 
